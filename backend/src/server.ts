@@ -32,6 +32,7 @@ const app  = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(helmet({ contentSecurityPolicy: false }));
+app.set('trust proxy', 1); // Required for Render/Heroku — trusts X-Forwarded-For header
 const allowedOrigins = [
   process.env.CLIENT_URL,
   'https://final-year-project-rho-nine.vercel.app',
