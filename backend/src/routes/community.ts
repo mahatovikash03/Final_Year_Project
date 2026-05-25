@@ -61,12 +61,12 @@ router.patch('/:id/like', async (req: Request, res: Response) => {
 // POST /api/v1/community/:id/comment — add comment
 router.post('/:id/comment', async (req: Request, res: Response) => {
   try {
-    const userId = (req as any).user._id;
+    const user   = (req as any).user;
     const { text } = req.body;
     if (!text) return res.status(400).json({ success: false, message: 'Comment text required.' });
     const post = await CommunityPost.findById(req.params.id);
     if (!post) return res.status(404).json({ success: false, message: 'Post not found.' });
-    post.comments.push({ user: userId, text, createdAt: new Date() });
+    post.comments.push({ user: user._id, authorName: user.name || 'User', text, createdAt: new Date() } as any);
     await post.save();
     res.json({ success: true, comments: post.comments.length });
   } catch (err: any) {

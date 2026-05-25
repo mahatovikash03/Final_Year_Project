@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -56,9 +56,9 @@ app.use('/api/v1/community',     communityRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
 app.use('/api/v1/streak',        streakRoutes);
 
-app.get('/health', (_, res) => res.json({ status: 'OK', version: '2.3.0', timestamp: new Date().toISOString() }));
-app.use('*', (_, res) => res.status(404).json({ success: false, message: 'Route not found.' }));
-app.use((err: any, _req: any, res: any, _next: any) => {
+app.get('/health', (_req: Request, res: Response) => res.json({ status: 'OK', version: '2.3.0', timestamp: new Date().toISOString() }));
+app.use('*', (_req: Request, res: Response) => res.status(404).json({ success: false, message: 'Route not found.' }));
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Error:', err.message);
   res.status(err.status || 500).json({ success: false, message: err.message || 'Internal server error.' });
 });
