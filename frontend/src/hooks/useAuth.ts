@@ -4,6 +4,7 @@ import api from '../services/api';
 
 interface User {
   id: string;
+  _id?: string;
   name: string;
   email: string;
   role: string;
@@ -21,6 +22,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string, gender?: string, age?: number, city?: string, state?: string, country?: string) => Promise<void>;
   updateUser: (partial: Partial<User>) => void;
+  setUser: (user: User) => void;
   logout: () => void;
 }
 
@@ -55,6 +57,10 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => {
         set({ user: null, token: null });
+      },
+
+      setUser: (user: User) => {
+        set({ user });
       },
 
       updateUser: (partial) => {
