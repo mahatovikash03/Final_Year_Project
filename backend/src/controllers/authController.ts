@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import crypto from 'crypto';
 import User from '../models/User';
 import Notification from '../models/Notification';
 import ActivityLog from '../models/ActivityLog';
 import { sendWelcomeEmail, sendPasswordResetEmail } from '../utils/email';
 
-const signToken = (id: string): string =>
-  jwt.sign({ id }, process.env.JWT_SECRET!, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
+const signToken = (id: string): string => {
+  const options: SignOptions = {
+    expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as SignOptions['expiresIn'],
+  };
+  return jwt.sign({ id }, process.env.JWT_SECRET as string, options);
+};
 
 const getIp = (req: Request): string =>
   (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
