@@ -28,6 +28,7 @@
     "mongoose": "^7.3.1",
     "morgan": "^1.10.0",
     "nodemailer": "^8.0.8",
+    "resend": "^6.12.4",
     "typescript": "^5.1.6"
   },
   "devDependencies": {

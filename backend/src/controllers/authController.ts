@@ -52,12 +52,12 @@ export const register = async (req: Request, res: Response) => {
     ActivityLog.create({ userId: user._id, action: 'REGISTER', category: 'auth', ip: getIp(req), metadata: { name: user.name, email: user.email } }).catch(() => {});
 
     // Welcome email (fire-and-forget)
-    if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    if (process.env.RESEND_API_KEY) {
       sendWelcomeEmail(user.email, user.name)
         .then(() => console.log(`✅ Welcome email sent to ${user.email}`))
         .catch(err => console.error(`❌ Welcome email FAILED for ${user.email}:`, err.message));
     } else {
-      console.warn('⚠️  GMAIL_USER or GMAIL_PASS not set in .env — skipping welcome email');
+      console.warn('⚠️  RESEND_API_KEY not set — skipping welcome email');
     }
 
     res.status(201).json({
