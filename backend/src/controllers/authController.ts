@@ -137,10 +137,9 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     const resetUrl = `${process.env.CLIENT_URL || 'http://localhost:3000'}/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
 
-    if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    if (process.env.RESEND_API_KEY) {
       await sendPasswordResetEmail(user.email, user.name, resetUrl);
     } else {
-      // Dev mode — log to console if email not configured
       console.log('\n🔐 DEV MODE — Password Reset URL:\n', resetUrl, '\n');
     }
 
