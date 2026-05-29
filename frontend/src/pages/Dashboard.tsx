@@ -259,12 +259,12 @@ export default function Dashboard() {
         style={{background:'linear-gradient(135deg,rgba(59,130,246,0.18),rgba(139,92,246,0.12),rgba(52,211,153,0.08))',border:'1px solid rgba(255,255,255,0.09)',backdropFilter:'blur(24px)',minHeight:200}}>
         <ParticleCanvas/>
         <div className="absolute top-0 left-0 right-0 h-px" style={{background:'linear-gradient(90deg,transparent,rgba(96,165,250,0.6),rgba(167,139,250,0.6),transparent)'}}/>
-        <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
-          <div className="flex-1 min-w-0">
+        <div className="relative z-10 flex items-center justify-between gap-3">
+          <div className="flex-1 min-w-0 overflow-hidden">
             <motion.p initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} className="text-gray-400 text-sm mb-1">{greet}</motion.p>
             <motion.h1 initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{delay:0.1}}
-              className="font-black text-white mb-2 break-words"
-              style={{fontSize:'clamp(1.8rem,5vw,4rem)',fontFamily:"'Space Grotesk',sans-serif",letterSpacing:'-2px',lineHeight:1}}>
+              className="hero-name font-black text-white mb-2"
+              style={{fontFamily:"'Space Grotesk',sans-serif"}}>
               {user?.name}
             </motion.h1>
             <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.2}} className="flex flex-wrap gap-2">
@@ -273,8 +273,10 @@ export default function Dashboard() {
               {avg>=70&&<span className="badge badge-yellow">🔥 On Fire!</span>}
             </motion.div>
           </div>
-          <div className="flex items-center gap-4 sm:gap-8">
-            {!loading?<WellnessRing score={avg}/>:<div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full shimmer"/>}
+          <div className="flex items-center gap-2 sm:gap-8 shrink-0">
+            <div className="wellness-ring-mobile">
+              {!loading?<WellnessRing score={avg}/>:<div className="w-32 h-32 rounded-full shimmer"/>}
+            </div>
             <div className="hidden lg:block"><LiveClock/></div>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const marginLeft = isDesktop ? (collapsed ? 68 : 236) : 0;
 
   return (
-    <div className="flex min-h-screen bg-animated">
+    <div className="flex min-h-screen bg-animated" style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <main
         className="flex-1 min-h-screen transition-all duration-300"
-        style={{ marginLeft }}
+        style={{ marginLeft, overflowX: 'hidden', maxWidth: isDesktop ? `calc(100vw - ${marginLeft}px)` : '100vw' }}
       >
         {/* Mobile top bar */}
         <div className="md:hidden sticky top-0 z-20 flex items-center justify-between px-4 py-3 border-b border-white/5"
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="w-9" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
+        <div className="w-full px-3 sm:px-6 py-4 sm:py-8" style={{ maxWidth: '100%', overflowX: 'hidden' }}>
           {children}
         </div>
       </main>
