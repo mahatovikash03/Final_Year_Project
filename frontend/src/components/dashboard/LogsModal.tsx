@@ -78,7 +78,7 @@ export default function LogsModal({ open, onClose }: { open: boolean; onClose: (
       ) : filtered.length === 0 ? (
         <div className="text-center py-12 text-gray-500"><p className="text-4xl mb-3">📋</p><p>{search ? 'No results found' : 'No logs yet'}</p></div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-[45vh] overflow-y-auto pr-1" style={{WebkitOverflowScrolling:'touch'}}>
           {filtered.map((log, i) => (
             <motion.div key={log._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.03 }}

@@ -140,7 +140,7 @@ export default function SleepModal({ open, onClose }: { open: boolean; onClose: 
           <p>No sleep entries yet. Add your first one!</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-[50vh] overflow-y-auto pr-1" style={{WebkitOverflowScrolling:'touch'}}>
           {logs.map((log, i) => (
             <motion.div key={log._id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.04 }}

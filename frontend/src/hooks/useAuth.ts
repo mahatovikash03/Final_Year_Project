@@ -37,6 +37,8 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true });
         try {
           const { data } = await api.post('/auth/login', { email, password });
+          // Save token in both zustand persist AND direct key (for Capacitor WebView)
+          localStorage.setItem('ht360_token', data.token);
           set({ user: data.user, token: data.token, isLoading: false });
         } catch (err: any) {
           set({ isLoading: false });
@@ -48,6 +50,7 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true });
         try {
           const { data } = await api.post('/auth/register', { name, email, password, gender, age, city, state, country });
+          localStorage.setItem('ht360_token', data.token);
           set({ user: data.user, token: data.token, isLoading: false });
         } catch (err: any) {
           set({ isLoading: false });
@@ -56,6 +59,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
+        localStorage.removeItem('ht360_token');
         set({ user: null, token: null });
       },
 

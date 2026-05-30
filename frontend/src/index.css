@@ -287,19 +287,6 @@
 
   /* ── MOBILE RESPONSIVE FIXES ────────────────────────── */
   @media (max-width: 640px) {
-    /* Fix hero name breaking on mobile */
-    .hero-name {
-      font-size: 1.75rem !important;
-      letter-spacing: -1px !important;
-      word-break: keep-all !important;
-      overflow-wrap: normal !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      max-width: 100% !important;
-      line-height: 1.2 !important;
-    }
-
     /* Fix profile quick stats - 2 cols on mobile */
     .profile-stats-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -314,21 +301,20 @@
     }
     .tab-bar::-webkit-scrollbar { display: none; }
 
-    /* Fix form inputs not overflowing */
+    /* Fix form inputs not zooming on iOS */
     .input-field {
-      font-size: 16px !important; /* prevents iOS zoom */
+      font-size: 16px !important;
     }
 
-    /* Fix cards not overflowing */
-    .glass-card, .glass-card-hover, .rounded-2xl, .rounded-3xl {
-      max-width: 100% !important;
-      overflow: hidden !important;
+    /* Wellness ring - always perfect square, never oval */
+    .wellness-ring-container {
+      width: 130px !important;
+      height: 130px !important;
+      flex-shrink: 0 !important;
     }
-
-    /* Wellness ring smaller on mobile */
-    .wellness-ring-mobile {
-      transform: scale(0.65) !important;
-      transform-origin: center right !important;
+    .wellness-ring-container svg {
+      width: 130px !important;
+      height: 130px !important;
     }
   }
 }

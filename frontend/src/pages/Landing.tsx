@@ -38,9 +38,16 @@ export default function Landing() {
           <span className="text-2xl font-black text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Health<span className="gradient-text-blue">Track360</span>
           </span>
-          <div className="flex items-center gap-3">
-            <Link to="/login"    className="btn-secondary text-sm py-2 px-4">Sign In</Link>
-            <Link to="/register" className="btn-primary  text-sm py-2 px-4">Get Started Free</Link>
+          <div className="flex items-center gap-2">
+            <Link to="/login"
+              className="text-sm font-semibold px-4 py-2 rounded-xl border border-white/15 text-gray-300 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all whitespace-nowrap">
+              Sign In
+            </Link>
+            <Link to="/register"
+              className="text-sm font-semibold px-4 py-2 rounded-xl text-white whitespace-nowrap"
+              style={{ background: 'linear-gradient(135deg,#3b82f6,#1d4ed8)', boxShadow: '0 4px 15px rgba(59,130,246,0.35)' }}>
+              Get Started Free
+            </Link>
           </div>
         </div>
       </nav>

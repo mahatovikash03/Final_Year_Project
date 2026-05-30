@@ -136,7 +136,7 @@ export default function WorkoutModal({ open, onClose }: { open: boolean; onClose
       ) : logs.length === 0 ? (
         <div className="text-center py-12 text-gray-500"><p className="text-4xl mb-3">🏋️</p><p>No workouts logged yet!</p></div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-[40vh] overflow-y-auto pr-1" style={{WebkitOverflowScrolling:'touch'}}>
           {logs.map((log, i) => (
             <motion.div key={`${log.logId}-${i}`} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.04 }}

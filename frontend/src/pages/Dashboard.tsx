@@ -49,12 +49,12 @@ function ParticleCanvas() {
 
 /* ── Wellness Ring ─────────────────────────────────────────────────────── */
 function WellnessRing({ score }: { score: number }) {
-  const S=200, sw=14, r=(S-sw)/2, circ=2*Math.PI*r;
+  const S=180, sw=14, r=(S-sw)/2, circ=2*Math.PI*r;
   const col=score>=70?'#34d399':score>=50?'#fbbf24':'#f87171';
   const lbl=score>=70?'Excellent':score>=50?'Good':'Improve';
   return (
     <div className="relative flex items-center justify-center">
-      <motion.svg width={S} height={S} style={{filter:`drop-shadow(0 0 24px ${col}66)`}}>
+      <motion.svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} style={{filter:`drop-shadow(0 0 24px ${col}66)`,display:'block',flexShrink:0}}>
         <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={col}/><stop offset="100%" stopColor={col} stopOpacity="0.3"/></linearGradient></defs>
         <circle cx={S/2} cy={S/2} r={r+8} fill="none" stroke={`${col}0a`} strokeWidth={22}/>
@@ -263,8 +263,8 @@ export default function Dashboard() {
           <div className="flex-1 min-w-0 overflow-hidden">
             <motion.p initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} className="text-gray-400 text-sm mb-1">{greet}</motion.p>
             <motion.h1 initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{delay:0.1}}
-              className="hero-name font-black text-white mb-2"
-              style={{fontFamily:"'Space Grotesk',sans-serif"}}>
+              className="font-black text-white mb-2"
+              style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:'clamp(1.1rem,4vw,2.2rem)',letterSpacing:'-0.5px',lineHeight:1.2,wordBreak:'break-word',overflowWrap:'break-word',whiteSpace:'normal'}}>
               {user?.name}
             </motion.h1>
             <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.2}} className="flex flex-wrap gap-2">
@@ -273,8 +273,8 @@ export default function Dashboard() {
               {avg>=70&&<span className="badge badge-yellow">🔥 On Fire!</span>}
             </motion.div>
           </div>
-          <div className="flex items-center gap-2 sm:gap-8 shrink-0">
-            <div className="wellness-ring-mobile">
+          <div className="flex items-center gap-2 sm:gap-6 shrink-0">
+            <div className="wellness-ring-container" style={{width:180,height:180,flexShrink:0}}>
               {!loading?<WellnessRing score={avg}/>:<div className="w-32 h-32 rounded-full shimmer"/>}
             </div>
             <div className="hidden lg:block"><LiveClock/></div>
